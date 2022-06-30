@@ -28,36 +28,36 @@ public class Notes implements Serializable {
         return ID;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public boolean isPinned() {
-        return pinned;
-    }
-
-    public String getDate() {
-        return getDate();
-    }
-
     public void setID(int ID) {
         this.ID = ID;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
+    public String getNotes() {
+        return notes;
+    }
+
     public void setNotes(String notes) {
         this.notes = notes;
     }
 
+    public String getDate() {
+        return date;
+    }
+
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public boolean isPinned() {
+        return pinned;
     }
 
     public void setPinned(boolean pinned) {

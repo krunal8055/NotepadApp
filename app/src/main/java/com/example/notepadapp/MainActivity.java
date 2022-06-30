@@ -63,9 +63,10 @@ public class MainActivity extends AppCompatActivity {
                 database.mainDAO().insert(new_notes);
                 notes.clear();
                 notes.addAll(database.mainDAO().getAll());
-                notesListAdapter.notifyDataSetChanged();
+
             }
         }
+        notesListAdapter.notifyDataSetChanged();
     }
 
     private void updateRecycler(List<Notes> notes) {
