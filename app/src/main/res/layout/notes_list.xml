@@ -32,7 +32,7 @@
                 android:textSize="18sp"/>
             <ImageView
                 android:id="@+id/pin_image"
-                android:src="@drawable/pin_icon"
+                android:src="@drawable/pin"
                 android:layout_alignParentEnd="true"
                 android:layout_width="20dp"
                 android:layout_height="20dp" />

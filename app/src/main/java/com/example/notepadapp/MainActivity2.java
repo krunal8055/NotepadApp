@@ -18,9 +18,11 @@ import java.util.Date;
 
 public class MainActivity2 extends AppCompatActivity {
 
-    EditText editText_title, editText_notes;
+    EditText editText_title;
+    EditText editText_notes;
     ImageView imageView_save;
     Notes notes;
+    Boolean isOld = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,16 @@ public class MainActivity2 extends AppCompatActivity {
         imageView_save = findViewById(R.id.imageView_save);
         editText_title = findViewById(R.id.editText_title);
         editText_notes = findViewById(R.id.editText_notes);
+
+        notes = new Notes();
+        try {
+            notes = (Notes) getIntent().getSerializableExtra("old_note");
+            editText_title.setText(notes.getTitle());
+            editText_notes.setText(notes.getNotes());
+            isOld = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         imageView_save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +57,11 @@ public class MainActivity2 extends AppCompatActivity {
                 }
                 SimpleDateFormat formatter = new SimpleDateFormat("EEE, d MMM yyyy HH:mm a");
                 Date date = new Date();
-                notes = new Notes();
+
+                if(!isOld) {
+                    notes = new Notes();
+                }
+
                 notes.setTitle(title);
                 notes.setNotes(descriptions);
                 notes.setDate(formatter.format(date));

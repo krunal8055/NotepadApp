@@ -51,7 +51,7 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesViewHolder> {
 
         if(list.get(position).isPinned())
         {
-            holder.pin_Image.setImageResource(R.drawable.pin_icon);
+            holder.pin_Image.setImageResource(R.drawable.pin);
         }
         else
         {
@@ -95,6 +95,11 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesViewHolder> {
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public void filterList(List<Notes> filteredList) {
+        list = filteredList;
+        notifyDataSetChanged();
     }
 }
 
