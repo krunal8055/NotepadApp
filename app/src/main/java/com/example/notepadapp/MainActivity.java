@@ -99,24 +99,21 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 101) {
-            if(resultCode == Activity.RESULT_OK) {
+            if (requestCode == 101 && resultCode != RESULT_CANCELED) {
+                if (resultCode == Activity.RESULT_OK) {
+                    Notes new_notes = (Notes) data.getSerializableExtra("note");
+                    database.mainDAO().insert(new_notes);
+                    notes.clear();
+                    notes.addAll(database.mainDAO().getAll());
+                    notesListAdapter.notifyDataSetChanged();
+                }
+            } else if (requestCode == 102 && resultCode != RESULT_CANCELED) {
                 Notes new_notes = (Notes) data.getSerializableExtra("note");
-                database.mainDAO().insert(new_notes);
+                database.mainDAO().update(new_notes.getID(), new_notes.getTitle(), new_notes.getNotes());
                 notes.clear();
                 notes.addAll(database.mainDAO().getAll());
                 notesListAdapter.notifyDataSetChanged();
             }
-        }
-        else if(requestCode == 102)
-        {
-            Notes new_notes = (Notes) data.getSerializableExtra("note");
-            database.mainDAO().update(new_notes.getID(), new_notes.getTitle(), new_notes.getNotes());
-            notes.clear();
-            notes.addAll(database.mainDAO().getAll());
-            notesListAdapter.notifyDataSetChanged();
-        }
-
     }
 
     private void updateRecycler(List<Notes> notes) {
@@ -186,5 +183,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     private void logoutMethod() {
+        Intent i = new Intent(this,SignInActivity.class);
+        startActivity(i);
+        finish();
     }
 }
