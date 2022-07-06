@@ -13,6 +13,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -73,6 +75,14 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 return false;
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //TOOLBAR MENU
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.side_menu,menu);
+        return true;
     }
 
     private void filter(String newText) {
@@ -161,8 +171,20 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 notesListAdapter.notifyDataSetChanged();
                 Toast.makeText(this,"Note Deleted Successfully!",Toast.LENGTH_LONG).show();
                 return true;
+            case R.id.upload:
+                uploadNotes();
+                return true;
+            case R.id.logout:
+                logoutMethod();
+                return true;
             default:
                 return false;
         }
+    }
+
+    private void uploadNotes() {
+    }
+
+    private void logoutMethod() {
     }
 }
